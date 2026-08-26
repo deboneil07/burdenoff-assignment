@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/deboneil07/burdenoff-assignment#readme",
+  "bugs": {
+    "url": "https://github.com/deboneil07/burdenoff-assignment/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/deboneil07/burdenoff-assignment.git"
+  },
+  "license": "ISC",
+  "author": "neil",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "prisma skills sync || exit 0",
+    "dev": "nodemon --exec tsx index.ts"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.3.0",
+    "@vercel/nft": "^1.11.0",
+    "prisma": "^5.22.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "nodemon": "^3.1.14",
+    "zod": "^4.4.3"
+  }
+}

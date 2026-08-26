@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String // bcrypt/argon2 hash only
+  timezone  String   @default("UTC") // IANA name, e.g. "Asia/Kolkata"
+  createdAt DateTime @default(now())
+
+  habits Habit[]
+
+  @@map("users")
+}
+
+model Habit {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  checkIns CheckIn[]
+
+  @@index([userId])
+  @@map("habits")
+}
+
+model CheckIn {
+  id         String   @id @default(cuid())
+  habitId    String
+  localDay   String // "YYYY-MM-DD" — the user's LOCAL day this counts for
+  occurredAt DateTime @default(now()) // actual instant, stored in UTC
+  createdAt  DateTime @default(now())
+
+  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+
+  @@unique([habitId, localDay])
+  @@index([habitId])
+  @@map("check_ins")
+}
