@@ -22,9 +22,8 @@ export function computeStreaks(days: string[], today: string): Streaks {
 	}
 
 	let anchorIdx = -1;
-	if (daysBetween(unique[unique.length - 1]!, today) === 0) {
-		anchorIdx = unique.length - 1;
-	} else if (unique.length >= 2 && daysBetween(unique[unique.length - 2]!, unique[unique.length - 1]!) === 1 && daysBetween(unique[unique.length - 1]!, today) === 1) {
+	const lastDiff = daysBetween(unique[unique.length - 1]!, today);
+	if (lastDiff === 0 || lastDiff === 1) {
 		anchorIdx = unique.length - 1;
 	}
 
